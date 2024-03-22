@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+
 const User = require('../models/userModel.js');
 
 const getUsers = async (req, res) => {
@@ -18,11 +20,13 @@ const createUser = async (req, res) => {
 			return res.status(400).json({ message: 'El email ya está en uso' });
 		}
 
+		const passwordHash = await bcrypt.hash(password, 10);
+
 		const newUser = new User({
 			firstName,
 			lastName,
 			email,
-			password,
+			password: passwordHash,
 			rol,
 		});
 
