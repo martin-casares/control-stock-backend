@@ -16,6 +16,7 @@ const createUser = async (req, res) => {
 		const { firstName, lastName, email, password, rol } = req.body;
 
 		const userFound = await User.findOne({ email });
+
 		if (userFound) {
 			return res.status(400).json({ message: 'El email ya está en uso' });
 		}
