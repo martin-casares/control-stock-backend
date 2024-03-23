@@ -62,7 +62,7 @@ const login = async (req, res) => {
 	try {
 		const userFound = await User.findOne({ email });
 		if (!userFound)
-			return res.status(400).json({ message: 'Usuario no Encontrado!' });
+			return res.status(400).json({ message: 'Credenciales Incorrectas!' });
 
 		const isMatch = await bcrypt.compare(password, userFound.password);
 		if (!isMatch)
